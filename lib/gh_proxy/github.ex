@@ -3,8 +3,11 @@ defmodule GHProxy.GithubAPI do
 
   @callback get_user(binary()) :: {:ok, User.t()} | {:error, String.t()}
 
-  def get_user(username), do: impl().get_user(username)
-  def impl, do: Application.get_env(:gh_proxy, :github, GHProxy.GithubImpl)
+  def get_user(username), do: get_impl().get_user(username)
+
+  # Choose the config-based implementation at compile time and use it at runtime.
+  @impl_module Application.compile_env(:gh_proxy, :github, GHProxy.GithubImpl)
+  def get_impl(), do: @impl_module
 end
 
 defmodule GHProxy.GithubImpl do
@@ -25,7 +28,7 @@ defmodule GHProxy.GithubImpl do
            username: username,
            fullname: Map.get(data, "name"),
            bio: Map.get(data, "bio"),
-           url: Map.get(data, "html_url"),
+           url: Map.fetch!(data, "html_url"),
            avatar_url: Map.get(data, "avatar_url")
          }}
 
@@ -33,8 +36,8 @@ defmodule GHProxy.GithubImpl do
         Logger.error("#{inspect(err)}")
         {:error, msg}
 
-      _ ->
-        {:error, "Case is not handled, check `Tentacat.Users.find` spec."}
+      weird ->
+        {:error, "Case `#{weird}` is not handled, check `Tentacat.Users.find` spec."}
     end
   end
 end

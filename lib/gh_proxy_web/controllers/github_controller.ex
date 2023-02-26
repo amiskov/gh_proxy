@@ -3,8 +3,7 @@ defmodule GHProxyWeb.GithubController do
 
   use GHProxyWeb, :controller
 
-  alias GHProxy.Cache, as: Cache
-  alias GHProxy.User, as: User
+  alias GHProxy.{Cache, User}
   alias GHProxy.GithubAPI, as: GH
 
   def index(conn, _params) do

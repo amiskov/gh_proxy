@@ -3,7 +3,7 @@ defmodule GHProxy.Cache do
 
   alias GHProxy.User, as: User
 
-  @storage Application.compile_env(:gh_proxy, Cache)[:cache_name]
+  @storage Application.compile_env!(:gh_proxy, Cache)[:cache_name]
 
   @spec get(k :: String.t()) :: {:ok, User.t()} | {:ok, nil}
   def get(k) do
