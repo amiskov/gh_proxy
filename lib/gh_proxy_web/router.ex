@@ -18,6 +18,7 @@ defmodule GHProxyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get("/:username", GithubController, :show)
   end
 
   # Other scopes may use custom stacks.

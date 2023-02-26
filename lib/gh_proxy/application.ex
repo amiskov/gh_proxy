@@ -13,7 +13,8 @@ defmodule GHProxy.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: GHProxy.PubSub},
       # Start the Endpoint (http/https)
-      GHProxyWeb.Endpoint
+      GHProxyWeb.Endpoint,
+      {Cachex, name: :github_cache}
       # Start a worker by calling: GHProxy.Worker.start_link(arg)
       # {GHProxy.Worker, arg}
     ]

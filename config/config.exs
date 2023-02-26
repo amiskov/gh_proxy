@@ -11,6 +11,8 @@ config :gh_proxy,
   namespace: GHProxy,
   generators: [binary_id: true]
 
+config :gh_proxy, Cache, cache_name: :github_cache
+
 # Configures the endpoint
 config :gh_proxy, GHProxyWeb.Endpoint,
   url: [host: "localhost"],

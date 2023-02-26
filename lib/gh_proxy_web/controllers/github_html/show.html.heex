@@ -1,0 +1,14 @@
+<.flash_group flash={@flash} />
+<div class="p-5">
+  <h1 class="text-xl font-bold">
+    <%= assigns.user.username %>
+    (<a href={assigns.user.url}><%= assigns.user.username %></a>)
+  </h1>
+  <img class="w-20 float-left" src={assigns.user.avatar_url} alt="">
+  <ul class="ml-24">
+    <li><%= assigns.user.fullname %></li>
+    <li>Bio: <%= assigns.user.bio %></li>
+  </ul>
+  <pre class="clear-both pt-5 whitespace-pre-line">
+    </pre>
+</div>
